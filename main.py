@@ -12,15 +12,16 @@ def hello():
 
 
 @app.route("/extract", methods=['POST'])
-
 def extract():
-    content = [line.decode("utf-8","strict") for line in io.BytesIO(request.data).readlines()]
+    raw_content = request.form["content"]
+    raw_content = raw_content.replace('\r\n','\n')
+    content = io.StringIO(raw_content).readlines()
     values = get_csv_document(content)
     si = io.StringIO()
     cw = csv.writer(si)
     cw.writerows(values)
     output = make_response(si.getvalue())
-    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-Disposition"] = "attachment; filename=summary.csv"
     output.headers["Content-type"] = "text/csv"
     return output 
 
