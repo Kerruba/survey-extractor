@@ -27,13 +27,14 @@
                 submitButton.innerText = "Extract";
             }
             
+            
             function checkCompleted() {
                 submitButton.innerText = "Working..."
                 var timer = setInterval(()=> {
                     allCookies = document.cookie;
-                    if(allCookies.indexOf("extr-done") > -1) {
+                    finished = allCookies.indexOf("extr-done") > -1;
+                    if(finished) {
                         downloadCompleted();
-                        document.cookie = allCookies.replace("extr-done=t","");
                         clearInterval(timer);
                     }
                 }, 1000)
