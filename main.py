@@ -21,6 +21,7 @@ def extract():
     cw = csv.writer(si)
     cw.writerows(values)
     output = make_response(si.getvalue())
+    output.set_cookie("extr-done", "t")
     output.headers["Content-Disposition"] = "attachment; filename=summary.csv"
     output.headers["Content-type"] = "text/csv"
     return output 

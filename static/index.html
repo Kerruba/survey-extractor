@@ -4,13 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="static/style.css">
     <title>Survey Extractor</title>
 </head>
 <body>
-    <h1>Survey extractor</h1>
-    <form action="/extract" method="post">
-        <textarea name="content" id="content" cols="30" rows="10"></textarea>
-        <input type="submit" value="Extract">
+    <h1 id="site-title">Survey extractor</h1>
+    <form action="/extract" method="post" id="form">
+        <textarea name="content" id="content" placeholder="Put your content here..."></textarea>
+        <div id="submit" class="button">Extract</div>
     </form>
+    <script>
+        (() => { 
+            var submitButton = document.getElementById("submit")
+            var form = document.getElementById("form");
+
+            function submitForm() {
+                checkCompleted()
+                form.submit();
+            }
+            
+            function downloadCompleted() {
+                submitButton.innerText = "Extract";
+            }
+            
+            function checkCompleted() {
+                submitButton.innerText = "Working..."
+                var timer = setInterval(()=> {
+                    allCookies = document.cookie;
+                    if(allCookies.indexOf("extr-done") > -1) {
+                        downloadCompleted();
+                        document.cookie = allCookies.replace("extr-done=t","");
+                        clearInterval(timer);
+                    }
+                }, 1000)
+            }
+            submitButton.addEventListener("click", submitForm)
+        })();
+    </script>
 </body>
 </html>

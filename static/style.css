@@ -1,0 +1,46 @@
+:root {
+    --btn-margin: 10px;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: rgb(0, 143, 107);
+    color: white;
+}
+
+#site-title {
+    text-align: center;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+#content {
+    border-radius: 5px;
+    min-height: 500px;
+    resize: none;
+}
+
+.button {
+    height: 2em;
+    border: 1px solid white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: whitesmoke;
+    color: black;
+    margin: var(--btn-margin, 10px) 0;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px #333;
+}
+
+.button:active {
+    box-shadow: none;
+    margin-top: calc(var(--btn-margin, 10px) + 4px);
+}
