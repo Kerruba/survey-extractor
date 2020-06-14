@@ -6,6 +6,7 @@ import csv
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def hello():
     return app.send_static_file("index.html")
@@ -14,9 +15,10 @@ def hello():
 @app.route("/extract", methods=['POST'])
 def extract():
     raw_content = request.form["content"]
-    raw_content = raw_content.replace('\r\n','\n')
+    raw_content = raw_content.replace('\r\n', '\n')
     content = io.StringIO(raw_content).readlines()
-    values = get_csv_document(content)
+    locale = request.form["locale"]
+    values = get_csv_document(content, locale)
     si = io.StringIO()
     cw = csv.writer(si)
     cw.writerows(values)
@@ -24,8 +26,9 @@ def extract():
     output.set_cookie("extr-done", "", max_age=timedelta(seconds=5))
     output.headers["Content-Disposition"] = "attachment; filename=summary.csv"
     output.headers["Content-type"] = "text/csv"
-    return output 
+    return output
+
 
 if __name__ == "__main__":
-    app.debug=True
+    app.debug = True
     app.run()

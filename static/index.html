@@ -11,6 +11,13 @@
     <h1 id="site-title">Survey extractor</h1>
     <form action="/extract" method="post" id="form">
         <textarea name="content" id="content" placeholder="Put your content here..."></textarea>
+        <div>
+            <b>Language to use:</b>
+            <input type="radio" id="it" name="locale" value="it" checked="checked">
+            <label for="it">Italiano</label>
+            <input type="radio" id="en" name="locale" value="en">
+            <label for="en">English</label>
+        </div>
         <div id="submit" class="button">Extract</div>
     </form>
     <script>

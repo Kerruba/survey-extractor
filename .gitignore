@@ -103,3 +103,5 @@ debug.sh
 run_dev.sh
 
 *.sh
+.idea/
+.vscode/
